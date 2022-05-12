@@ -1,6 +1,7 @@
 
 import './App.css';
 import { useEffect, useState } from 'react';
+import Loader from './Loader';
 var axios = require("axios").default;
 function App() {
   const [citydata,setCitydata] = useState([])
@@ -34,7 +35,7 @@ function App() {
     });
   }
   
-  return loader ? (<p>Loading...</p>) :
+  return loader ? (<Loader/>) :
   (
     <div className="App">
       <div className="sc">
