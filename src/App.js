@@ -6,6 +6,7 @@ function App() {
   const [citydata,setCitydata] = useState([])
   const [sdata,setSdata] = useState("")
   const [curlim,setCurlim] = useState(5)
+  const [loader,setLoader] = useState(true);
   var options = {
     method: 'GET',
     url: 'https://wft-geo-db.p.rapidapi.com/v1/geo/cities',
@@ -19,11 +20,13 @@ function App() {
     gafunc()
   },[])
   const gafunc =() =>{
+    // setLoader(true)
     axios.request(options).then(function (response) {
       // console.log(response.data.data);
       const mydata =response.data.data;
       setCitydata(mydata);
       console.log(citydata)
+      setLoader(false)
      
      
     }).catch(function (error) {
@@ -31,7 +34,8 @@ function App() {
     });
   }
   
-  return (
+  return loader ? (<p>Loading...</p>) :
+  (
     <div className="App">
       <div className="sc">
       <input className='sb'
@@ -59,6 +63,7 @@ function App() {
         
           
         }).map((val, key=0) => {
+
         
           return (
             <tr >
@@ -74,65 +79,77 @@ function App() {
         <div className='btns'>
         <button onClick={()=>{
           setCurlim(1);
+          setLoader(true);
           gafunc();
         }}>1</button>
         <button
         onClick={()=>{
           setCurlim(2);
+          setLoader(true);
           gafunc();
         }}
         >2</button>
         <button
         onClick={()=>{
           setCurlim(3);
+          setLoader(true);
           gafunc();
         }}
         >3</button>
         <button
         onClick={()=>{
           setCurlim(4);
+          setLoader(true);
           gafunc();
         }}
         >4</button>
         <button
         onClick={()=>{
           setCurlim(5);
+          setLoader(true);
           gafunc();
         }}
         >5</button>
         <button
         onClick={()=>{
           setCurlim(6);
+          setLoader(true);
           gafunc();
         }}
         >6</button>
         <button
         onClick={()=>{
           setCurlim(7);
+          setLoader(true);
           gafunc();
         }}
         >7</button>
         <button
         onClick={()=>{
+
           setCurlim(8);
+          setLoader(true);
           gafunc();
         }}
         >8</button>
         <button
         onClick={()=>{
           setCurlim(9);
+          setLoader(true);
           gafunc();
         }}
         >9</button>
         <button
         onClick={()=>{
           setCurlim(10);
+          setLoader(true);
           gafunc();
         }}
         >10</button>
         </div>
         
-      <input type="number" onChange={(e)=>{setCurlim(e.target.value)}} onKeyDown={()=>{gafunc()}}/>  
+      <input type="number" onChange={(e)=>{setCurlim(e.target.value)}} onKeyUp={()=>{setLoader(true); gafunc();}}/>
+        
       </div>
      
     </div>
